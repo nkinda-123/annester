@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Annester Kibonde Portfolio</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <div class="api-status-section">
+      <h2>🚀 Backend Status</h2>
+      <p>API Server Information and Endpoints</p>
+      <div class="api-cards">
+        <div class="api-card active">
+          <div class="status-indicator"></div>
+          <h3>Profile API</h3>
+          <p><code>/api/profile</code></p>
+        </div>
+        <div class="api-card active">
+          <div class="status-indicator"></div>
+          <h3>Projects API</h3>
+          <p><code>/api/projects</code></p>
+        </div>
+        <div class="api-card active">
+          <div class="status-indicator"></div>
+          <h3>Skills API</h3>
+          <p><code>/api/skills</code></p>
+        </div>
+        <div class="api-card active">
+          <div class="status-indicator"></div>
+          <h3>Qualifications API</h3>
+          <p><code>/api/qualifications</code></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="api-status-section">
+      <h2>📊 Portfolio Admin Dashboard</h2>
+      <p>Manage your portfolio content with the tabs below</p>
+    </div>
+
+    <div class="admin-header">
+      <h1>Portfolio Admin</h1>
+      <p>Manage your portfolio content - update profile, projects, skills, and qualifications</p>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="tab-button active" data-tab="profile">Profile</button>
+      <button class="tab-button" data-tab="skills">Skills</button>
+      <button class="tab-button" data-tab="projects">Projects</button>
+      <button class="tab-button" data-tab="qualifications">Qualifications</button>
+    </div>
+
+    <!-- Profile Tab -->
+    <div id="profile" class="tab-content active">
+      <div class="form-section">
+        <h2>Edit Profile Information</h2>
+        <div id="profileMessage" class="message"></div>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="profileName">Full Name</label>
+            <input type="text" id="profileName" required>
+          </div>
+          <div class="form-group">
+            <label for="profileRole">Role</label>
+            <input type="text" id="profileRole" required>
+          </div>
+          <div class="form-group">
+            <label for="profileSummary">Summary</label>
+            <textarea id="profileSummary" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="profileBio">Bio</label>
+            <textarea id="profileBio" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="profileEmail">Email</label>
+              <input type="email" id="profileEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="profilePhone">Phone</label>
+              <input type="text" id="profilePhone" required>
+            </div>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Skills Tab -->
+    <div id="skills" class="tab-content">
+      <div class="form-section">
+        <h2>Add New Skill</h2>
+        <div id="skillsMessage" class="message"></div>
+        <form id="skillForm">
+          <div class="form-group">
+            <label for="skillName">Skill Name</label>
+            <input type="text" id="skillName" placeholder="e.g., Python, Tableau" required>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Add Skill</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>Current Skills</h2>
+        <div id="skillsList" class="items-list"></div>
+      </div>
+    </div>
+
+    <!-- Projects Tab -->
+    <div id="projects" class="tab-content">
+      <div class="form-section">
+        <h2>Add/Edit Project</h2>
+        <div id="projectsMessage" class="message"></div>
+        <form id="projectForm">
+          <input type="hidden" id="projectId">
+          <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <input type="text" id="projectName" required>
+          </div>
+          <div class="form-group">
+            <label for="projectDesc">Description</label>
+            <textarea id="projectDesc" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="projectTools">Tools (comma-separated)</label>
+            <input type="text" id="projectTools" placeholder="e.g., Python, Pandas, Tableau" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectStatus">Status</label>
+              <select id="projectStatus" required>
+                <option value="Prototype">Prototype</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Ready">Ready</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="projectLink">Project Link</label>
+              <input type="text" id="projectLink" placeholder="https://..." required>
+            </div>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Save Project</button>
+            <button type="button" id="clearProjectForm" class="btn btn-secondary" style="display: none;">Clear</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>Your Projects</h2>
+        <div id="projectsList" class="items-list"></div>
+      </div>
+    </div>
+
+    <!-- Qualifications Tab -->
+    <div id="qualifications" class="tab-content">
+      <div class="form-section">
+        <h2>Add Qualification</h2>
+        <div id="qualMessage" class="message"></div>
+        <form id="qualForm">
+          <div class="form-group">
+            <label for="qualTitle">Title</label>
+            <input type="text" id="qualTitle" placeholder="e.g., BSc Data Science" required>
+          </div>
+          <div class="form-group">
+            <label for="qualInstitution">Institution</label>
+            <input type="text" id="qualInstitution" placeholder="e.g., University of Dar es Salaam" required>
+          </div>
+          <div class="form-group">
+            <label for="qualDate">Date/Duration</label>
+            <input type="text" id="qualDate" placeholder="e.g., 2024 - Present" required>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Add Qualification</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>Your Qualifications</h2>
+        <div id="qualList" class="items-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
